@@ -29,8 +29,7 @@ public class DogServiceImpl implements DogService {
     @Override
     public String retrieveDogBreedById(Long id) {
         Optional<String> result = dogRepository.findDogBreedById(id);
-        String breed = result.orElseThrow(DogNotFoundException::new);
-        return breed;
+        return result.orElseThrow(DogNotFoundException::new);
     }
 
     @Override
