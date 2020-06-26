@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,5 +53,25 @@ public class UserControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.username", is(equalTo("waggs"))))
         .andExpect(jsonPath("$.password", is(equalTo("pass"))));
+  }
+
+  @Test
+  public void createUser_request_with_JSON_response_with_XML() throws Exception {
+    // Arrange
+    String userJson = "{\"username\":\"waggs\", \"password\":\"pass\"}";
+
+    // Act
+    ResultActions actual =
+        mockMvc.perform(
+            post("/users/create")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_XML)
+                .content(userJson));
+
+    // Assert
+    actual
+        .andExpect(status().isOk())
+        .andExpect(xpath("/User/username").string("waggs"))
+        .andExpect(xpath("/User/password").string("pass"));
   }
 }
