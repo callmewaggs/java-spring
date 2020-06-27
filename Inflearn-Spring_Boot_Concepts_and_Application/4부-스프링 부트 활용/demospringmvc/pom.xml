@@ -33,6 +33,14 @@
       <groupId>com.fasterxml.jackson.dataformat</groupId>
       <version>2.9.6</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.webjars.bower/jquery -->
+    <dependency>
+      <artifactId>jquery</artifactId>
+      <groupId>org.webjars.bower</groupId>
+      <version>3.5.1</version>
+    </dependency>
+
     <dependency>
       <artifactId>junit</artifactId>
       <groupId>junit</groupId>
